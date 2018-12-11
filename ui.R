@@ -86,7 +86,7 @@ shinyUI(pageWithSidebar(
                                                                                           "United States" ,       "Utrecht"   ,           "Valencia"      ,       "Valencia"   ,          "Valparaiso"     ,      "Vancouver"   ,         "Venezuela"      ,     
                                                                                           "Vienna"      ,         "Vietnam"   ,           "Virginia Beach"  ,     "Vladivostok"  ,        "Volgograd"      ,      "Voronezh"    ,         "Warsaw"  ,            
                                                                                           "Washington"  ,         "Winnipeg",  "Wroclaw"      ,        "Yekaterinburg",        "Yokohama"  ,  "Yongin",              
-                                                                                          "Zamboanga City" ,      "Zapopan",              "Zaporozhye"       ,    "Zaragoza"       ,      "Zurich"  ), selected = "Worldwide", selectize = FALSE),
+                                                                                          "Zamboanga City" ,      "Zapopan",              "Zaporozhye"       ,    "Zaragoza"       ,      "Zurich"  ), selected = "India", selectize = FALSE),
                submitButton(text="Search"),HTML("<div><h3> The table below shows the top trending 
                                                 hashtags on Twitter of the location you have chosen. These are the hot topics today! </h3></div>"),
                tableOutput("trendtable"),
