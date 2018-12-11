@@ -30,6 +30,12 @@ PrepareTwitter<-function()
 
 PrepareTwitter()
 
+api_key <- "1bPHwCh8RXhiNTo6HHxFHIFEF" #Consumer key from twitter app
+api_secret <- "xDvs6BgDlWf0SL7sS3Kqxn6QXzBmcfTx8dXLTJ6E5M5Kgv2ZZK" #Consumer secret from twitter app
+access_token <- "1068933937727078400-Q2g8Dg3jjIa5Ktvk3uoRngz035Gwmf" #access token from twitter app
+access_token_secret <- "50W7nJ8yrdVJISx4VOyEy3VPfEPmb8EAo2P7wrPPcah33" #access secret from twitter app
+setup_twitter_oauth(api_key, api_secret, access_token, access_token_secret)
+
 shinyServer(function(input, output) {
   
   #Search tweets and create a data frame -Stanton (2013)
