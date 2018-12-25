@@ -200,7 +200,7 @@ shinyServer(function(input, output) {
   
                       
   #Pie
-  slices <- reactive ({ slices <- c(sum(table_final()$Positive), sum(table_final()$Negative)) })
+  slices1 <- reactive ({ slices <- c(sum(table_final()$Positive), sum(table_final()$Negative)) })
   lbls <- c("Positive", "Negative")
   library(plotrix)
   pct <- round(slices/sum(slices)*100) 
