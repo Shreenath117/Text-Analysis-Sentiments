@@ -194,23 +194,10 @@ shinyServer(function(input, output) {
   output$word <- renderPlot({ wordcloud(text_word(),random.order=F,max.words=80, col=rainbow(100), scale=c(4.5, 1)) })
   
   #HISTOGRAM
-  output$histPos<- renderPlot({ hist(table_final()$Positive, col=rainbow(10), main="line graph of Positive Sentiment", xlab = "Positive Score") })
-  output$histNeg<- renderPlot({ hist(table_final()$Negative, col=rainbow(10), main="line graph of Negative Sentiment", xlab = "Negative Score") })
-  output$histScore<- renderPlot({ hist(table_final()$Score, col=rainbow(10), main="Histogram of Score Sentiment", xlab = "Overall Score") })	
+  output$histScore<- renderPlot({ hist(table_final()$Score, col=rainbow(10), main="Histogram of Score Sentiment", xlab = "Overall Score") })
+  output$histPos<- renderPlot({ hist(table_final()$Positive, col=rainbow(10), main="histogram of Positive Sentiment", xlab = "Positive Score") })
+  output$histNeg<- renderPlot({ hist(table_final()$Negative, col=rainbow(10), main="Histogram of Negative Sentiment", xlab = "Negative Score") })
   
-                      
-  #Pie
-  slices <- reactive ({ slices <- c(sum(table_final()$Positive), sum(table_final()$Negative))
-                      })
-  lbls <- c("Positive", "Negative")
-                           
-                            
-  pct<- reactive ({ pct <- c(sum(table_final()$Positive)/(sum(table_final()$Positive)+sum(table_final()$Negative)), sum(table_final()$Negative)/(sum(table_final()$Positive)+sum(table_final()$Negative)))
-                      })
-   lbls <- paste(lbls, pct)# add percents to labels
-    lbls <- paste(lbls,"%",sep="")# ad % to labels 
-  library(plotrix)
-  output$piechart <- renderPlot({ pie(slices(), labels = lbls, col=rainbow(length(lbls)),explode=0.00, main="Sentiment Analysis") })
   
   #Top trending tweets
   toptrends <- function(place)
