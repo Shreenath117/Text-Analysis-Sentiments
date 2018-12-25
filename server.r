@@ -49,14 +49,14 @@ shinyServer(function(input, output) {
     df$text <- gsub("(f|ht)tp(s?)://(.*)[.][a-z]+", "", df$text)
     df$text <- gsub("&amp", "", df$text)
 #Cleaning up twitter handles
-df$text <- gsub("(RT|via)((?:\\b\\W*@\\w+)+)", "", df$text)
+    df$text <- gsub("(RT|via)((?:\\b\\W*@\\w+)+)", "", df$text)
 #Removing User Names
-df$text <- gsub("@\\w+", "", df$text)
+    df$text <- gsub("@\\w+", "", df$text)
 #Cleaning up punctuations and digits
-df$text <- gsub("[[:punct:]]", "", df$text)
-df$text <- gsub("[[:digit:]]", "", df$text)
+    df$text <- gsub("[[:punct:]]", "", df$text)
+    df$text <- gsub("[[:digit:]]", "", df$text)
 #Cleaning up URL's
-df$text <- gsub("http\\w+", "", df$text)	      
+    df$text <- gsub("http\\w+", "", df$text)	      
  return (df$text)
   }
   
@@ -214,7 +214,7 @@ df$text <- gsub("http\\w+", "", df$text)
 	labels <- c("Positive", "Negative")
 	library(plotrix)
 	#pie(slices(), labels = labels, col=rainbow(length(labels)), main="Sentiment Analysis")
-	output$piechart<-renderPlot({pie3D(slices(), labels = labels, col=rainbow(length(labels)),explode=0.00, main="Sentiment Analysis")
+	output$piechart<-renderPlot({pie3D(slices(), labels = labels, col=rainbow(length(labels)),explode=0.00, main="Sentiment Analysis") })
 				 
 ##Top trending tweets
   toptrends <- function(place)
