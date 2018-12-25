@@ -28,7 +28,7 @@ shinyUI(pageWithSidebar(
       
       tabPanel("Histogram",HTML
                ("<div><h3> Histograms graphically depict the positivity or negativity of peoples' opinion about of the hashtag
-                 </h3></div>"), plotOutput("histScore"), plotOutput("histPos"), plotOutput("histNeg")
+                 </h3></div>"), plotOutput("histPos"), plotOutput("histNeg")
                ),
       
       
