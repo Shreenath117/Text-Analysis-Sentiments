@@ -198,11 +198,15 @@ shinyServer(function(input, output) {
   output$histNeg<- renderPlot({ hist(table_final()$Negative, col=rainbow(10), main="line graph of Negative Sentiment", xlab = "Negative Score") })
   output$histScore<- renderPlot({ hist(table_final()$Score, col=rainbow(10), main="Histogram of Score Sentiment", xlab = "Overall Score") })	
   
+                      
   #Pie
   slices <- reactive ({ slices <- c(sum(table_final()$Positive), sum(table_final()$Negative)) })
-  labels <- c("Positive", "Negative")
+  lbls <- c("Positive", "Negative")
   library(plotrix)
-  output$piechart <- renderPlot({ pie(slices(), labels = labels, col=rainbow(length(labels)),explode=0.00, main="Sentiment Analysis") })
+  pct <- round(slices/sum(slices)*100) 
+  lbls <- paste(lbls, pct) # add percents to labels  
+  lbls <- paste(lbls,"%",sep="") # ad % to labels 
+  output$piechart <- renderPlot({ pie(slices(), labels = lbls, col=rainbow(length(lbls)),explode=0.00, main="Sentiment Analysis") })
   
   #Top trending tweets
   toptrends <- function(place)
