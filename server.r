@@ -204,8 +204,9 @@ shinyServer(function(input, output) {
 	labels <- c("Positive", "Negative")
 	library(plotrix)
 	#pie(slices(), labels = labels, col=rainbow(length(labels)), main="Sentiment Analysis")
-	output$piechart<-renderPlot({pie3D(slices(), labels = labels, col=rainbow(length(labels)),explode=0.00, main="Sentiment Analysis") }
-  #Top trending tweets
+	output$piechart<-renderPlot({pie3D(slices(), labels = labels, col=rainbow(length(labels)),explode=0.00, main="Sentiment Analysis")
+				 
+#Top trending tweets
   toptrends <- function(place)
   {
     a_trends = availableTrendLocations()
