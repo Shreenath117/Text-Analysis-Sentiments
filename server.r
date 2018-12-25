@@ -30,10 +30,10 @@ PrepareTwitter<-function()
 
 PrepareTwitter()
 
-api_key <- "1bPHwCh8RXhiNTo6HHxFHIFEF" #Consumer key from twitter app
-api_secret <- "xDvs6BgDlWf0SL7sS3Kqxn6QXzBmcfTx8dXLTJ6E5M5Kgv2ZZK" #Consumer secret from twitter app
-access_token <- "1068933937727078400-Q2g8Dg3jjIa5Ktvk3uoRngz035Gwmf" #access token from twitter app
-access_token_secret <- "50W7nJ8yrdVJISx4VOyEy3VPfEPmb8EAo2P7wrPPcah33" #access secret from twitter app
+api_key <- "ovfjKNVvJN3cledZCbbZ1hnUp" #Consumer key from twitter app
+api_secret <- "pOUKSOHxzIqiXxdfucJPxn3kmfuTufkyKFIVMD837HB040E8Fx" #Consumer secret from twitter app
+access_token <- "1068933937727078400-BbmceKhrkXO71atrxJGKSJoDg428q5" #access token from twitter app
+access_token_secret <- "vIxrfM7PUaJyY4mrCPalRAaoMFVSpzulNS3jAqMwk5ovm" #access secret from twitter app
 setup_twitter_oauth(api_key, api_secret, access_token, access_token_secret)
 
 shinyServer(function(input, output) {
@@ -194,15 +194,15 @@ shinyServer(function(input, output) {
   output$word <- renderPlot({ wordcloud(text_word(),random.order=F,max.words=80, col=rainbow(100), scale=c(4.5, 1)) })
   
   #HISTOGRAM
-  output$histPos<- renderPlot({ hist(table_final()$Positive, col=rainbow(10), main="Histogram of Positive Sentiment", xlab = "Positive Score") })
-  output$histNeg<- renderPlot({ hist(table_final()$Negative, col=rainbow(10), main="Histogram of Negative Sentiment", xlab = "Negative Score") })
+  output$histPos<- renderPlot({ line(table_final()$Positive, col=rainbow(10), main="line graph of Positive Sentiment", xlab = "Positive Score") })
+  output$histNeg<- renderPlot({ line(table_final()$Negative, col=rainbow(10), main="line graph of Negative Sentiment", xlab = "Negative Score") })
   output$histScore<- renderPlot({ hist(table_final()$Score, col=rainbow(10), main="Histogram of Score Sentiment", xlab = "Overall Score") })	
   
   #Pie
   slices <- reactive ({ slices <- c(sum(table_final()$Positive), sum(table_final()$Negative)) })
   labels <- c("Positive", "Negative")
   library(plotrix)
-  output$piechart <- renderPlot({ pie3D(slices(), labels = labels, col=rainbow(length(labels)),explode=0.00, main="Sentiment Analysis") })
+  output$piechart <- renderPlot({ hist(slices(), labels = labels, col=rainbow(length(labels)),explode=0.00, main="Sentiment Analysis") })
   
   #Top trending tweets
   toptrends <- function(place)
