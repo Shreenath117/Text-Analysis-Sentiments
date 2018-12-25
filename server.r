@@ -47,7 +47,17 @@ shinyServer(function(input, output) {
     #removes emoticons
     df$text <- sapply(df$text,function(row) iconv(row, "latin1", "ASCII", sub=""))
     df$text = gsub("(f|ht)tp(s?)://(.*)[.][a-z]+", "", df$text)
-    return (df$text)
+    df$text=gsub("&amp", "", df$text)
+#Cleaning up twitter handles
+df$text = gsub("(RT|via)((?:\\b\\W*@\\w+)+)", "", df$text)
+#Removing User Names
+df$text = gsub("@\\w+", "", df$text)
+#Cleaning up punctuations and digits
+df$text = gsub("[[:punct:]]", "", df$text)
+df$text = gsub("[[:digit:]]", "", df$text)
+#Cleaning up URL's
+df$text = gsub("http\\w+", "", df$text)	      
+ return (df$text)
   }
   
   
@@ -206,7 +216,7 @@ shinyServer(function(input, output) {
 	#pie(slices(), labels = labels, col=rainbow(length(labels)), main="Sentiment Analysis")
 	output$piechart<-renderPlot({pie3D(slices(), labels = labels, col=rainbow(length(labels)),explode=0.00, main="Sentiment Analysis")
 				 
-#Top trending tweets
+##Top trending tweets
   toptrends <- function(place)
   {
     a_trends = availableTrendLocations()
