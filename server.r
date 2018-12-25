@@ -194,15 +194,15 @@ shinyServer(function(input, output) {
   output$word <- renderPlot({ wordcloud(text_word(),random.order=F,max.words=80, col=rainbow(100), scale=c(4.5, 1)) })
   
   #HISTOGRAM
-  output$histPos<- renderPlot({ line(table_final()$Positive, col=rainbow(10), main="line graph of Positive Sentiment", xlab = "Positive Score") })
-  output$histNeg<- renderPlot({ line(table_final()$Negative, col=rainbow(10), main="line graph of Negative Sentiment", xlab = "Negative Score") })
+  output$histPos<- renderPlot({ hist(table_final()$Positive, col=rainbow(10), main="line graph of Positive Sentiment", xlab = "Positive Score") })
+  output$histNeg<- renderPlot({ hist(table_final()$Negative, col=rainbow(10), main="line graph of Negative Sentiment", xlab = "Negative Score") })
   output$histScore<- renderPlot({ hist(table_final()$Score, col=rainbow(10), main="Histogram of Score Sentiment", xlab = "Overall Score") })	
   
   #Pie
   slices <- reactive ({ slices <- c(sum(table_final()$Positive), sum(table_final()$Negative)) })
   labels <- c("Positive", "Negative")
   library(plotrix)
-  output$piechart <- renderPlot({ hist(slices(), labels = labels, col=rainbow(length(labels)),explode=0.00, main="Sentiment Analysis") })
+  output$piechart <- renderPlot({ pie(slices(), labels = labels, col=rainbow(length(labels)),explode=0.00, main="Sentiment Analysis") })
   
   #Top trending tweets
   toptrends <- function(place)
