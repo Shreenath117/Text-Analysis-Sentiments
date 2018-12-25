@@ -192,11 +192,12 @@ shinyServer(function(input, output) {
   text_word<-reactive({text_word<-wordclouds( tweets() )})
   
   output$word <- renderPlot({ wordcloud(text_word(),random.order=F,max.words=80, col=rainbow(100), scale=c(4.5, 1)) })
+                      
   
   #HISTOGRAM
   output$histScore<- renderPlot({ hist(table_final()$Score, col=rainbow(10), main="Histogram of Score Sentiment", xlab = "Overall Score") })
-  output$histPos<- renderPlot({ hist(table_final()$Positive, col=rainbow(10), main="histogram of Positive Sentiment", xlab = "Positive Score") })
-  output$histNeg<- renderPlot({ hist(table_final()$Negative, col=rainbow(10), main="Histogram of Negative Sentiment", xlab = "Negative Score") })
+  output$histPos<- renderPlot({ hist(table_final()$Positive, col= 'blue', main="histogram of Positive Sentiment", xlab = "Positive Score") })
+  output$histNeg<- renderPlot({ hist(table_final()$Negative, col='red', main="Histogram of Negative Sentiment", xlab = "Negative Score") })
   
   
   #Top trending tweets
