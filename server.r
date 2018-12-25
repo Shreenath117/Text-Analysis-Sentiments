@@ -204,7 +204,8 @@ shinyServer(function(input, output) {
                       pct <- round(slices/sum(slices)*100)
                        lbls <- c("Positive", "Negative")
                         lbls <- paste(lbls, pct) # add percents to labels  
-                           lbls <- paste(lbls,"%",sep="") # ad % to labels })
+                           lbls <- paste(lbls,"%",sep="") # ad % to labels 
+                      })
   
   library(plotrix)
   output$piechart <- renderPlot({ pie(slices(), labels = lbls, col=rainbow(length(lbls)),explode=0.00, main="Sentiment Analysis") })
