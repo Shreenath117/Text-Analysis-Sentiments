@@ -195,7 +195,6 @@ shinyServer(function(input, output) {
                       
   
   #HISTOGRAM
-  output$histScore<- renderPlot({ hist(table_final()$Score, col=rainbow(10), main="Histogram of Score Sentiment", xlab = "Overall Score") })
   output$histPos<- renderPlot({ hist(table_final()$Positive, col= 'blue', main="histogram of Positive Sentiment", xlab = "Positive Score") })
   output$histNeg<- renderPlot({ hist(table_final()$Negative, col='red', main="Histogram of Negative Sentiment", xlab = "Negative Score") })
   
@@ -218,26 +217,7 @@ shinyServer(function(input, output) {
   trend_table<-reactive({ trend_table<-toptrends(input$trendingTable) })
   output$trendtable <- renderTable(trend_table())
   
-  #TOP TWEETERS
-  
-  # Top tweeters for a particular hashtag (Barplot)
-  toptweeters<-function(tweetlist)
-  {
-    tweets <- twListToDF(tweetlist)
-    tweets <- unique(tweets)
-    # Make a table of the number of tweets per user
-    d <- as.data.frame(table(tweets$screenName)) 
-    d <- d[order(d$Freq, decreasing=T), ] #descending order of tweeters according to frequency of tweets
-    names(d) <- c("User","Tweets")
-    return (d)
-  }
-  
-  # Plot the table above for the top 20
-  
-  d<-reactive({d<-toptweeters(  twtList() ) })
-  output$tweetersplot<-renderPlot ( barplot(head(d()$Tweets, 20), names=head(d()$User, 20), horiz=F, las=2, main="Top Tweeters", col=1) )
-  output$tweeterstable<-renderTable(head(d(),20))
-  
+
   #TOP 10 HASHTAGS OF USER
   
   tw1 <- reactive({ tw1 = userTimeline(input$user, n = 3200) })
