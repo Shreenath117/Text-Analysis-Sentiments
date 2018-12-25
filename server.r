@@ -203,10 +203,10 @@ shinyServer(function(input, output) {
   slices <- reactive ({ slices <- c(sum(table_final()$Positive), sum(table_final()$Negative))
                       pct <- round(slices/sum(slices)*100)
                       })
-  lbls <- reactive ({lbls <- c("Positive", "Negative")
+  lbls <- c("Positive", "Negative")
                         lbls <- paste(lbls, pct) # add percents to labels  
                            lbls <- paste(lbls,"%",sep="") # ad % to labels 
-                      })
+                      
   library(plotrix)
   output$piechart <- renderPlot({ pie(slices(), labels = lbls, col=rainbow(length(lbls)),explode=0.00, main="Sentiment Analysis") })
   
