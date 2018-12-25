@@ -46,17 +46,17 @@ shinyServer(function(input, output) {
     df<- do.call("rbind",lapply(twtList,as.data.frame))
     #removes emoticons
     df$text <- sapply(df$text,function(row) iconv(row, "latin1", "ASCII", sub=""))
-    df$text = gsub("(f|ht)tp(s?)://(.*)[.][a-z]+", "", df$text)
-    df$text=gsub("&amp", "", df$text)
+    df$text <- gsub("(f|ht)tp(s?)://(.*)[.][a-z]+", "", df$text)
+    df$text <- gsub("&amp", "", df$text)
 #Cleaning up twitter handles
-df$text = gsub("(RT|via)((?:\\b\\W*@\\w+)+)", "", df$text)
+df$text <- gsub("(RT|via)((?:\\b\\W*@\\w+)+)", "", df$text)
 #Removing User Names
-df$text = gsub("@\\w+", "", df$text)
+df$text <- gsub("@\\w+", "", df$text)
 #Cleaning up punctuations and digits
-df$text = gsub("[[:punct:]]", "", df$text)
-df$text = gsub("[[:digit:]]", "", df$text)
+df$text <- gsub("[[:punct:]]", "", df$text)
+df$text <- gsub("[[:digit:]]", "", df$text)
 #Cleaning up URL's
-df$text = gsub("http\\w+", "", df$text)	      
+df$text <- gsub("http\\w+", "", df$text)	      
  return (df$text)
   }
   
