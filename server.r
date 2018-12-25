@@ -205,7 +205,7 @@ shinyServer(function(input, output) {
   lbls <- c("Positive", "Negative")
                            
                             
-  pct<- reactive ({ pct <- c(sum(table_final()$Positive)/(sum(table_final()$Positive)+sum(table_final()$Negative)), sum(table_final()$Negative)/(sum(table_final()$Positive)+sum(table_final()$Negative))
+  pct<- reactive ({ pct <- c(sum(table_final()$Positive)/(sum(table_final()$Positive)+sum(table_final()$Negative)), sum(table_final()$Negative)/(sum(table_final()$Positive)+sum(table_final()$Negative)))
                       })
    lbls <- paste(lbls, pct)# add percents to labels
     lbls <- paste(lbls,"%",sep="")# ad % to labels 
