@@ -205,15 +205,15 @@ shinyServer(function(input, output) {
                       
   
   #HISTOGRAM
-  output$histPos<- renderPlot({ hist(table_final()$Positive, col= 'blue', main="Histogram of the Positive Sentiments", xlab = "Positive Scores out of 5") })
-  output$histNeg<- renderPlot({ hist(table_final()$Negative, col='red', main="Histogram of the Negative Sentiments", xlab = "Negative Scores out of 5") })
+  output$histPos<- renderPlot({ hist(table_final()$Positive, col= 'blue', main="Frequency of the Positive Sentiment Score", xlab = "Positive Score from 0 to 10") })
+  output$histNeg<- renderPlot({ hist(table_final()$Negative, col='red', main="Frequency of the Negative Sentiment Score", xlab = "Negative Scores from 0 to 10") })
   
   #PIE CHART
 	
 	slices <- reactive({c(sum(table_final()$Positive), sum(table_final()$Negative)) })
 	labels <- c("Positive", "Negative")
 	library(plotrix)
-	output$piechart<-renderPlot({pie(slices(), labels = labels, col=rainbow(length(labels)),explode=0.00, main="Sentiment Analysis") })
+	output$piechart<-renderPlot({pie(slices(), labels = labels, col=rainbow(length(labels)),explode=0.00, main="Pie Chart : Positive vs Negative") })
 			 
 
   #TOP HASHTAGS OF USER HANDLE ENTERED
