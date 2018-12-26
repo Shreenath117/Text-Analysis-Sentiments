@@ -193,7 +193,7 @@ shinyServer(function(input, output) {
     #clean text
     clean_text <- tm_map(corpus, removePunctuation)
     clean_text <- tm_map(clean_text, content_transformer(tolower))
-    clean_text <- tm_map(clean_text, content_transformer(replace_abbreviation))
+   
     clean_text <- tm_map(clean_text, removeWords, stopwords("english"))
     clean_text <- tm_map(clean_text, removeNumbers)
     clean_text <- tm_map(clean_text, stripWhitespace)
