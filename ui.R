@@ -29,7 +29,7 @@ shinyUI( # start of UI code
       
       
       tabPanel("Statistical Charts",HTML
-               ("<div><h3> Pie Charts & Histograms graphically depict the Positivie and Negative sentiments of People , scored on a scale of 5' opinion about of the hashtag
+               ("<div><h3> Pie Charts & Histograms graphically depict the Positive and Negative sentiments of People scoring on the tweets done.
                  </h3></div>"),plotOutput("piechart"), plotOutput("histPos"), plotOutput("histNeg")
                ),
 	    
