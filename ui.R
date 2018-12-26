@@ -3,7 +3,7 @@ library("shiny")
 library("shinythemes")
 
 shinyUI( # start of UI code
-  fluidPage(theme = shinytheme("slate"), # start of fluid page - to adjust to screen dimension
+  fluidPage(theme = shinytheme("cerulean"), # start of fluid page - to adjust to screen dimension
             
             titlePanel(strong("Twitter Sentiment Analysis")), #title of the App
             
