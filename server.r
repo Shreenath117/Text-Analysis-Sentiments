@@ -1,5 +1,4 @@
-
-# Installing package if not already installed (Stanton 2013)
+#Installing the required packages from the Cran repository
 EnsurePackage<-function(x)
 {x <- as.character(x)
 if (!require(x,character.only=TRUE))
@@ -9,7 +8,7 @@ if (!require(x,character.only=TRUE))
 }
 }
 
-#Identifying packages required  (Stanton 2013)
+#Identifying packages to be loaded
 PrepareTwitter<-function()
 {
   EnsurePackage("twitteR")
@@ -22,12 +21,12 @@ PrepareTwitter<-function()
   EnsurePackage("RJSONIO")
   EnsurePackage("wordcloud")
   EnsurePackage("gridExtra")
-  #EnsurePackage("gplots") Not required... ggplot2 is used
   EnsurePackage("plyr")
   EnsurePackage("e1071")
   EnsurePackage("RTextTools")
 }
 
+#Twitter Authentication Keys set up
 PrepareTwitter()
 
 api_key <- "ovfjKNVvJN3cledZCbbZ1hnUp" #Consumer key from twitter app
@@ -38,8 +37,8 @@ setup_twitter_oauth(api_key, api_secret, access_token, access_token_secret)
 
 shinyServer(function(input, output) {
   
-  #Search tweets and create a data frame -Stanton (2013)
-  # Clean the tweets
+  #Search tweets and create a data frame
+  # Cleaning the tweets
   TweetFrame<-function(twtList)
   {
     
@@ -192,8 +191,8 @@ shinyServer(function(input, output) {
     corpus <- Corpus(VectorSource(text))
     #clean text
     clean_text <- tm_map(corpus, removePunctuation)
-    #clean_text <- tm_map(clean_text, content_transformation)
     clean_text <- tm_map(clean_text, content_transformer(tolower))
+    clean_text <- tm_map(clean_text, content_transformer(replace_abbreviation))
     clean_text <- tm_map(clean_text, removeWords, stopwords("english"))
     clean_text <- tm_map(clean_text, removeNumbers)
     clean_text <- tm_map(clean_text, stripWhitespace)
@@ -201,41 +200,22 @@ shinyServer(function(input, output) {
   }
   text_word<-reactive({text_word<-wordclouds( tweets() )})
   
-  output$word <- renderPlot({ wordcloud(text_word(),random.order=F,max.words=80, col=rainbow(100), scale=c(4.5, 1)) })
+  output$word <- renderPlot({ wordcloud(text_word(),random.order=F,max.words=75, col=rainbow(100), scale=c(4.5, 1)) })
                       
   
   #HISTOGRAM
-  output$histPos<- renderPlot({ hist(table_final()$Positive, col= 'blue', main="histogram of Positive Sentiment", xlab = "Positive Score") })
-  output$histNeg<- renderPlot({ hist(table_final()$Negative, col='red', main="Histogram of Negative Sentiment", xlab = "Negative Score") })
+  output$histPos<- renderPlot({ hist(table_final()$Positive, col= 'blue', main="Histogram of the Positive Sentiments", xlab = "Positive Scores out of 5") })
+  output$histNeg<- renderPlot({ hist(table_final()$Negative, col='red', main="Histogram of the Negative Sentiments", xlab = "Negative Scores out of 5") })
   
   #PIE CHART
 	
 	slices <- reactive({c(sum(table_final()$Positive), sum(table_final()$Negative)) })
 	labels <- c("Positive", "Negative")
 	library(plotrix)
-	#pie(slices(), labels = labels, col=rainbow(length(labels)), main="Sentiment Analysis")
 	output$piechart<-renderPlot({pie(slices(), labels = labels, col=rainbow(length(labels)),explode=0.00, main="Sentiment Analysis") })
-				 
-##Top trending tweets
-  toptrends <- function(place)
-  {
-    a_trends = availableTrendLocations()
-    woeid = a_trends[which(a_trends$name==place),3]
-    trend = getTrends(woeid)
-    trends = trend[1:2]
-    
-    dat <- cbind(trends$name)
-    dat2 <- unlist(strsplit(dat, split=", "))
-    dat3 <- grep("dat2", iconv(dat2, "latin1", "ASCII", sub="dat2"))
-    dat4 <- dat2[-dat3]
-    return (dat4)
-  }
-  
-  trend_table<-reactive({ trend_table<-toptrends(input$trendingTable) })
-  output$trendtable <- renderTable(trend_table())
-  
+			 
 
-  #TOP 10 HASHTAGS OF USER
+  #TOP HASHTAGS OF USER HANDLE ENTERED
   
   tw1 <- reactive({ tw1 = userTimeline(input$user, n = 3200) })
   tw <- reactive({ tw = twListToDF(tw1()) })
