@@ -42,5 +42,5 @@ shinyUI( # start of UI code
                ("<div> <h3>Hastag frequencies in the tweets of the tweeter</h3></div>"))
     )#end of tabset panel
   )#end of main panel
-  
+ ) 
 ))#end of shinyUI
