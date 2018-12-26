@@ -1,15 +1,18 @@
+#Invoking Shiny Library
 library(shiny)
 
-shinyUI(pageWithSidebar(
+shinyUI( # start of UI code
+  fluidPage(theme = shinytheme("slate"), # start of fluid page - to adjust to screen dimension
+            
+            titlePanel(strong("Twitter Sentiment Analysis")), #title of the App
+            
+            sidebarLayout( #start of side bar layout
   
-  headerPanel("Twitter Sentiment Analysis"),
-  
-  # Getting User Inputs
-  
-  sidebarPanel(
+		    sidebarPanel(
     
-    textInput("searchTerm", "Enter data to be searched with '#'", "#"),
-    sliderInput("maxTweets","Number of recent tweets to use for analysis:",min=5,max=1000,value=500), 
+    textInput("searchTerm", "Enter the data to be searched with '#'", "#"),
+    # A slider input taking maximum of 3k tweets to be pulled from twitter and a minium of 5, with default as 1000
+    sliderInput("maxTweets","Number of current tweets to be used for the text & sentiment analysis:",min=5,max=3000,value=1000), 
     submitButton(text="Analyse")
     
   ),
@@ -19,22 +22,20 @@ shinyUI(pageWithSidebar(
     
     tabsetPanel(
      
-      tabPanel("WordCloud",HTML("<div><h3>Most used words associated with the hashtag</h3></div>"),plotOutput("word"),
+      tabPanel("WordCloud",HTML("<div><h3>Frequently used words associated with the hashtag</h3></div>"),plotOutput("word"),
                HTML
-               ("<div><h4> A word cloud is a visual representation of text data, typically used to depict keyword metadata (tags) on websites, or to visualize free form text.
-                 This format is useful for quickly perceiving the most prominent terms and for locating a term alphabetically to determine its relative prominence.
-                 </h4></div>")),
+               ("<div><h4> Word clouds add simplicity and clarity. The most used keywords stand out better in a word cloud. A communication tool which is very easy to understand, impactful and more visually engaging than a table data </h4></div>")),
       
       
       tabPanel("Statistical Charts",HTML
-               ("<div><h3> Pie Charts & Histograms graphically depict the positivity or negativity of peoples' opinion about of the hashtag
+               ("<div><h3> Pie Charts & Histograms graphically depict the Positivie and Negative sentiments of People , scored on a scale of 5' opinion about of the hashtag
                  </h3></div>"),plotOutput("piechart"), plotOutput("histPos"), plotOutput("histNeg")
                ),
 	    
     
       
-      tabPanel("Table",HTML( "<div><h3> Depicting sentiment in a tablular form on a scale of 5 </h3></div>"), tableOutput("tabledata"),
-			HTML ("<div><h4> The table depicts the sentiment (positive, negative or neutral) of the tweets 
+      tabPanel("Table",HTML( "<div><h3> Tabular Display of Sentiment Score </h3></div>"), tableOutput("tabledata"),
+			HTML ("<div><h4> The table summarizes the sentiment (positive, negative or neutral) of the tweets 
 			      associated with the search hashtag by showing the score for each type of sentiment. </h4></div>")),
       
       tabPanel("Top Hashtags of User",textInput("user", "Enter User Name", "@"),submitButton(text="Search"),plotOutput("tophashtagsplot"),HTML
