@@ -1,5 +1,6 @@
 #Invoking Shiny Library
 library(shiny)
+library(shinythemes)
 
 shinyUI( # start of UI code
   fluidPage(theme = shinytheme("slate"), # start of fluid page - to adjust to screen dimension
