@@ -214,7 +214,7 @@ shinyServer(function(input, output) {
 	labels <- c("Positive", "Negative")
 	library(plotrix)
 	#output$piechart<-renderPlot({pie(slices(), labels = labels, col=rainbow(length(labels)),explode=0.00, main="Pie Chart : Positive vs Negative") })
-	output$piechart<-renderPlot({pie(slices(), labels = labels, c("green","red")),explode=0.00, main="Pie Chart : Positive vs Negative") })		 
+	output$piechart<-renderPlot({pie(slices(), labels = labels, col=c("green","red")),explode=0.00, main="Pie Chart : Positive vs Negative") })		 
 
   #TOP HASHTAGS OF USER HANDLE ENTERED
   
