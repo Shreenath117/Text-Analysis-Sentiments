@@ -24,6 +24,7 @@ PrepareTwitter<-function()
   EnsurePackage("plyr")
   EnsurePackage("e1071")
   EnsurePackage("RTextTools")
+  EnsurePackage("shinythemes")
 }
 
 #Twitter Authentication Keys set up
